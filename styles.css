@@ -1,0 +1,59 @@
+/* Use flexbox to center the entire animation in the middle of the page. */
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Makes the body take up the full viewport height. */
+}
+
+/* The container for the animation, establishing the coordinate system. */
+.space {
+    width: 200px;
+    height: 200px;
+    position: relative; /* Acts as the positioning context for its children. */
+}
+
+/* Styles the Earth element. */
+.earth {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* The "absolute centering" trick: moves the element back by half its own width and height. */
+    transform: translate(-50%, -50%);
+    background-color: brown;
+    border-radius: 50%; /* Makes the square a circle. */
+}
+
+/* This is the invisible path that the moon will follow. It's the element that actually rotates. */
+.orbit {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    /* The animation 'orbit' is applied here. It will run for 5s, at a constant speed, and loop forever. */
+    animation: orbit 5s linear infinite;
+}
+
+/* Defines the rotation animation for the .orbit container. */
+@keyframes orbit {
+    0% {
+        transform: rotate(0deg); /* Starts at the original angle. */
+    }
+    100% {
+        transform: rotate(360deg); /* Completes one full circle. */
+    }
+}
+
+/* Styles the Moon element. */
+.moon {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 0; /* Positions the moon at the top edge of its parent (.orbit). */
+    left: 50%; /* Moves the moon's left edge to the horizontal center of the .orbit container. */
+    /* This moves the moon back to the left by 50% of its OWN width, perfectly centering it. */
+    transform: translateX(-50%);
+    background-color: #eeaa11;
+    border-radius: 50%; /* Makes the moon a circle. */
+}
